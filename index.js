@@ -1,65 +1,4 @@
-let participantes = [
-  {
-    nome: "Dennis Costa",
-    email: "dennispcosta@gmail.com",
-    dataInscricao: new Date(2024, 3, 1, 18, 30),
-    dataCheckIn: null
-  },
-  {
-    nome: "Felipe Ribeiro",
-    email: "feliperibeiro@gmail.com",
-    dataInscricao: new Date(2024, 2, 31, 15, 00),
-    dataCheckIn: null
-  },
-  {
-    nome: "Ana Micalares",
-    email: "anamicalares@gmail.com",
-    dataInscricao: new Date(2024, 3, 2, 10, 15),
-    dataCheckIn: new Date(2024, 3, 2, 9, 45)
-  },
-  {
-    nome: "Maria Santos",
-    email: "mariasantos@gmail.com",
-    dataInscricao: new Date(2024, 3, 2, 14, 20),
-    dataCheckIn: new Date(2024, 3, 2, 11, 30)
-  },
-  {
-    nome: "Carlos Oliveira",
-    email: "carlosoliveira@gmail.com",
-    dataInscricao: new Date(2024, 3, 2, 00, 00),
-    dataCheckIn: new Date(2024, 3, 2, 8, 15)
-  },
-  {
-    nome: "Antônio Marcos",
-    email: "antoniomarcos@gmail.com",
-    dataInscricao: new Date(2024, 2, 31, 16, 45),
-    dataCheckIn: null
-  },
-  {
-    nome: "Pedro Almeida",
-    email: "pedroalmeida@gmail.com",
-    dataInscricao: new Date(2024, 2, 30, 10, 30),
-    dataCheckIn: new Date(2024, 3, 2, 9, 10)
-  },
-  {
-    nome: "Mariana Fernandes",
-    email: "marianafernandes@gmail.com",
-    dataInscricao: new Date(2024, 2, 30, 14, 15),
-    dataCheckIn: new Date(2024, 3, 2, 12, 45)
-  },
-  {
-    nome: "Lucas Cardoso",
-    email: "lucascardoso@gmail.com",
-    dataInscricao: new Date(2024, 3, 1, 8, 20),
-    dataCheckIn: new Date(2024, 3, 2, 7, 30)
-  },
-  {
-    nome: "Fernanda Costa",
-    email: "fernandacosta@gmail.com",
-    dataInscricao: new Date(2024, 3, 2, 13, 10),
-    dataCheckIn: new Date(2024, 3, 2, 18, 50)
-  }
-];
+let participantes = JSON.parse(localStorage.getItem("participantes")) || [];
 
 const criarNovoParticipante = (participante) => {
   // mostrar há quanto tempo que cada candidato fez a inscrição e check-in
@@ -122,6 +61,7 @@ const addParticipante = (event) => {
   }
 
   participantes = [participante, ...participantes]
+  localStorage.setItem('participantes', JSON.stringify(participantes))
   refreshList(participantes)
 
   event.target.querySelector('[name=nome]').value = ""
@@ -139,5 +79,6 @@ const fazerCheckIn = (event) => {
   })
   participante.dataCheckIn = new Date()
 
+  localStorage.setItem('participantes', JSON.stringify(participantes))
   refreshList(participantes)
 }
